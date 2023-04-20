@@ -50,7 +50,9 @@
               <p *ngIf="registerForm.get('password')?.getError('pattern')">Minimum eight characters, at least one letter and one number</p>
             </div>
           </div>
-          <h1 class="alert alert-danger h5 text-center"*ngIf="errMsg.length > 0">{{errMsg}}</h1>
+          <div class="col-12 my-2">
+            <h1 class="alert alert-danger h5 text-center"*ngIf="errMsg.length > 0">{{errMsg}}</h1>
+          </div>
           <div class="col-12">
             <button class="btn btn-outline-dark border border-1 border-dark text-white reg-btn d-block w-100" [disabled]="registerForm.invalid" (click)="register(registerForm)">
               <span *ngIf="!isLoading">Create Account</span>
