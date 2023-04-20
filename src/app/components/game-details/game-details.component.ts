@@ -29,7 +29,7 @@ export class GameDetailsComponent {
         this._GamesService.getSpecficGame(this.id).subscribe({
           next:res=>{
             console.log(res);
-
+            
             this.gameDetails = res
             this.backGround = `url(${this.gameDetails?.thumbnail.replace('thumbnail' , 'background')}) !important`
             this.screenshots =res.screenshots
