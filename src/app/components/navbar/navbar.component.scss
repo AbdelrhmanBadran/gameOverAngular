@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Xanh+Mono:ital@1&display=swap');
+
+.nav-link{
+  color: rgba(255, 255, 255, 0.67);
+}
+.active {
+  color: white !important;
+}
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show{
+  color: white !important;
+}
+.navbar-brand
+{
+  font-family: 'Xanh Mono', monospace;
+}
+.navbar-toggler{
+  border:  1px solid rgba(255, 255, 255, 0.67) !important;
+}
+.navbar-toggler:focus
+{
+  box-shadow: none;
+}

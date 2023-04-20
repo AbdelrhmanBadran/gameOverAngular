@@ -1,0 +1,25 @@
+.img-game
+{
+  background-image: url(../../../assets/images/login-wallpaper.jpg);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+}
+
+.form-control
+{
+  border: none;
+}
+
+.bg-form{
+  background-color: #32383E;
+}
+
+.text-semiWhite{
+  color: rgba(255, 255, 255, 0.505);
+
+}
+::placeholder{
+  color: rgba(255, 255, 255, 0.67);
+}

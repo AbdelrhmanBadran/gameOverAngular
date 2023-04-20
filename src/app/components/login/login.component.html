@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row gx-0 pt-5 mt-5">
+    <div class="col-lg-6 d-none d-lg-block">
+      <div class="img-game w-100 h-100">
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-12 mx-auto bg-form p-5">
+      <h1 class="alert alert-danger h5 text-center"*ngIf="errMsg.length > 0">{{errMsg}}</h1>
+      <form [formGroup]="loginForm" (ngSubmit)="loginForm">
+        <div class="row  gy-3">
+        <div class="d-flex justify-content-center">
+            <img src="assets/images/logo.png" width="150" alt="">
+        </div>
+        <h1 class="text-center h3 text-semiWhite">Log in to GamOver</h1>
+
+        <input type="email" class="form-control bg-dark text-white w-100 py-2 px-3 " placeholder="Email Address" formControlName="email">
+        <div class="alert alert-danger mt-2" role="alert" *ngIf="loginForm.get('email')?.dirty && loginForm.get('email')?.errors !==null">
+          <p *ngIf="loginForm.get('email')?.getError('required')">Email is Required</p>
+          <p *ngIf="loginForm.get('email')?.getError('pattern')">Enter Valid Email</p>
+        </div>
+
+        <input type="password" class="form-control bg-dark text-white w-100 py-2 px-3 " placeholder="Password" formControlName="password">
+        <div class="alert alert-danger mt-2" role="alert" *ngIf="loginForm.get('password')?.dirty && loginForm.get('password')?.errors !==null">
+          <p *ngIf="loginForm.get('password')?.getError('required')">Password is Required</p>
+          <p *ngIf="loginForm.get('password')?.getError('pattern')">Minimum eight characters, at least one letter and one number</p>
+        </div>
+        <h1 class="alert alert-danger h5 text-center"*ngIf="errMsg.length > 0">{{errMsg}}</h1>
+        <button class="btn btn-outline-dark border border-1 border-dark text-white reg-btn" [disabled]="loginForm.invalid" (click)="register(loginForm)">
+          <span *ngIf="!isLoading">Create Account</span>
+          <i class="fa-solid fa-spinner fa-spin" *ngIf="isLoading"></i>
+        </button>
+        </div>
+      </form>
+      <small class="text-semiWhite text-break">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" class="text-semiWhite">Privacy Policy</a> and <a href="https://policies.google.com/terms" class="text-semiWhite">Terms of Service</a> apply.</small>
+      <hr>
+      <p class="text-center text-semiWhite text-break">Not a member yet? <a routerLink="/blank/register" class="small a2 cursor  text-decoration-none">Create Account
+        <i class="fas fa-chevron-right small"></i>
+      </a></p>
+    </div>
+  </div>
+
+</div>

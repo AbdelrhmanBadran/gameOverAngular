@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row gx-0 pt-5 mt-5">
+    <div class="col-lg-6 d-none d-lg-block">
+      <div class="img-game w-100 h-100">
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-12 mx-auto bg-form p-5">
+
+      <form [formGroup]="registerForm" (ngSubmit)="registerForm">
+        <div class="row  gy-3">
+          <div class="col-12">
+            <h1 class="text-center h3 text-semiWhite">Create My Account</h1>
+          </div>
+          <div class="col-12">
+            <div class="row gy-3 ">
+              <div class="col-md-6">
+                <input type="text" class="form-control bg-dark text-white  py-2 px-3" placeholder="First Name" formControlName="first_name">
+                <div class="alert alert-danger mt-2" role="alert" *ngIf="registerForm.get('first_name')?.dirty && registerForm.get('first_name')?.errors !==null">
+                  <p *ngIf="registerForm.get('first_name')?.getError('required')">Name is Required</p>
+                  <p *ngIf="registerForm.get('first_name')?.getError('pattern')">Minmum Length 2 and Maxmum 20</p>
+                </div>
+              </div>
+              <div class="col-md-6 ">
+                <input type="text" class="form-control bg-dark text-white  py-2 px-3 " placeholder="Last Name" formControlName="last_name">
+                <div class="alert alert-danger mt-2" role="alert" *ngIf="registerForm.get('last_name')?.dirty && registerForm.get('last_name')?.errors !==null">
+                  <p *ngIf="registerForm.get('last_name')?.getError('required')">Name is Required</p>
+                  <p *ngIf="registerForm.get('last_name')?.getError('pattern')">Minmum Length 2 and Maxmum 20</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <input type="eamil" class="form-control bg-dark text-white w-100 py-2 px-3 " placeholder="Email Address" formControlName="email">
+            <div class="alert alert-danger mt-2" role="alert" *ngIf="registerForm.get('email')?.dirty && registerForm.get('email')?.errors !==null">
+              <p *ngIf="registerForm.get('email')?.getError('required')">Email is Required</p>
+              <p *ngIf="registerForm.get('email')?.getError('pattern')">Enter Valid Email</p>
+            </div>
+          </div>
+          <div class="col-12">
+            <input type="number" class="form-control bg-dark text-white w-100 py-2 px-3 " placeholder="Age" formControlName="age">
+            <div class="alert alert-danger mt-2" role="alert" *ngIf="registerForm.get('age')?.dirty && registerForm.get('age')?.errors !==null">
+              <p *ngIf="registerForm.get('age')?.getError('required')">Age is Required</p>
+              <p *ngIf="registerForm.get('age')?.getError('pattern')">Minimum 10 Maxmum 80</p>
+            </div>
+          </div>
+          <div class="col-12">
+            <input type="password" class="form-control bg-dark text-white w-100 py-2 px-3 " placeholder="Password" formControlName="password">
+            <div class="alert alert-danger mt-2" role="alert" *ngIf="registerForm.get('password')?.dirty && registerForm.get('password')?.errors !==null">
+              <p *ngIf="registerForm.get('password')?.getError('required')">Password is Required</p>
+              <p *ngIf="registerForm.get('password')?.getError('pattern')">Minimum eight characters, at least one letter and one number</p>
+            </div>
+          </div>
+          <h1 class="alert alert-danger h5 text-center"*ngIf="errMsg.length > 0">{{errMsg}}</h1>
+          <div class="col-12">
+            <button class="btn btn-outline-dark border border-1 border-dark text-white reg-btn d-block w-100" [disabled]="registerForm.invalid" (click)="register(registerForm)">
+              <span *ngIf="!isLoading">Create Account</span>
+              <i class="fa-solid fa-spinner fa-spin" *ngIf="isLoading"></i>
+            </button>
+          </div>
+          </div>
+        </form>
+        <small class="text-semiWhite text-break">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" class="text-semiWhite">Privacy Policy</a> and <a href="https://policies.google.com/terms" class="text-semiWhite">Terms of Service</a> apply.</small>
+        <hr>
+        <p class="text-center text-semiWhite text-break">Already a member?<a routerLink="/blank/login" class="small a2 ms-1 text-decoration-none">Log In
+          <i class="fas fa-chevron-right small"></i>
+        </a></p>
+      </div>
+  </div>
+
+</div>

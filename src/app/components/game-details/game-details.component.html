@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="player position-absolute top-0  start-0 w-100 vh-100 z-1" *ngIf="!isLoading"></div>
+  <div class="backLayer position-absolute top-0 start-0 w-100 vh-100 " *ngIf="!isLoading" [style.background-image]="backGround" ></div>
+  <div class="row" *ngIf="isLoading">
+    <div class="loading position-absolute top-0 start-0 w-100 h-100">
+      <div class="containee">
+        <div class="loader">
+            <span class="circle"></span>
+            <span class="sqaure"></span>
+            <span class="triangle"></span>
+            <span class="circle"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5 pt-5 text-white position-relative z-3" *ngIf="!isLoading">
+    <div class="col-md-4">
+      <div class="">
+        <div class="position-relative" (mouseenter)="Enter(video , image)" (mouseleave)="Leave(video , image)">
+          <img [src]="gameDetails?.thumbnail" class="card-img-top rounded-2 image position-absolute top-0 start-0 z-1" #image [alt]="gameDetails?.title" height="250">
+          <video #video  loop muted  class="w-100  rounded-2 position-relative" height="250">
+            <source _ngcontent-bxi-c6="" type="video/webm" [src]="videoPath">
+          </video>
+        </div>
+        <div class="d-flex justify-content-between mt-2">
+          <span class="badge fs-6 bg-form text-semiWhite fw-light p-2" >FREE</span>
+          <a class="btn btn-back text-white text-uppercase fw-bolder w-75 me-3" [href]="gameDetails?.freetogame_profile_url" target="_blank"> play Now <i class="fas fa-sign-out-alt"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="my-2">
+        <h1 class="text-semiWhite">{{gameDetails?.title}}</h1>
+        <p class="text-semiWhite h4 fw-bold">About {{gameDetails?.title}}</p>
+        <p class="text-semiWhite h5 fw-normal">{{gameDetails?.description}}</p>
+        <p class="text-semiWhite h4 fw-bold">Minimum System Requirements : </p>
+        <p class="text-semiWhite h5 fw-normal">Graphics : <span class="fw-light h6">{{gameDetails?.minimum_system_requirements?.graphics}}</span></p>
+        <p class="text-semiWhite h5 fw-normal">Memory : <span class="fw-light h6">{{gameDetails?.minimum_system_requirements?.memory}}</span></p>
+        <p class="text-semiWhite h5 fw-normal">OS : <span class="fw-light h6">{{gameDetails?.minimum_system_requirements?.os}}</span></p>
+        <p class="text-semiWhite h5 fw-normal">Processor  : <span class="fw-light h6">{{gameDetails?.minimum_system_requirements?.processor }}</span></p>
+        <p class="text-semiWhite h5 fw-normal" *ngIf="gameDetails?.minimum_system_requirements?.storage !==null">Storage  : <span class="fw-light h6">{{gameDetails?.minimum_system_requirements?.storage }}</span></p>
+        <p class="text-semiWhite h4 fw-bold mt-4">{{gameDetails?.title}} Screenshots</p>
+        <owl-carousel-o [options]="customOptions">
+          <ng-container *ngFor="let slide of screenshots">
+            <ng-template carouselSlide [id]="slide.id">
+              <img [src]="slide.image"  [alt]="gameDetails?.title" [title]="gameDetails?.title">
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+        <p class="text-semiWhite h4 fw-bold mt-4">Additional Information</p>
+        <div class="row gy-3">
+          <div class="col-md-4">
+            <p class="text-semiWhite h6 fw-light">Title</p>
+            <p class="text-semiWhite h5 fw-normal">{{gameDetails?.title}}</p>
+          </div>
+          <div class="col-md-4">
+            <p class="text-semiWhite h6 fw-light">Developer</p>
+            <p class="text-semiWhite h5 fw-normal">{{gameDetails?.developer}}</p>
+          </div>
+          <div class="col-md-4">
+            <p class="text-semiWhite h6 fw-light">Publisher</p>
+            <p class="text-semiWhite h5 fw-normal">{{gameDetails?.publisher}}</p>
+          </div>
+          <div class="col-md-4">
+            <p class="text-semiWhite h6 fw-light">Release Date</p>
+            <p class="text-semiWhite h5 fw-normal">{{gameDetails?.release_date}}</p>
+          </div>
+          <div class="col-md-4">
+            <p class="text-semiWhite h6 fw-light">Genre</p>
+            <p class="text-semiWhite h5 fw-normal">{{gameDetails?.genre}}</p>
+          </div>
+          <div class="col-md-4">
+            <p class="text-semiWhite h6 fw-light">Platform</p>
+
+            <p class="text-semiWhite h5 fw-normal">
+              <i class="fab fa-windows text-semiWhite mx-2 " *ngIf="gameDetails?.platform == 'Windows'"></i>
+              <i class="fas fa-window-maximize text-semiWhite mx-2" *ngIf="gameDetails?.platform == 'Web Browser'"></i>
+              {{gameDetails?.platform}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

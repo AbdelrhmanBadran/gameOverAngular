@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg shadow-sm bg-main fixed-top ">
+  <div class="container">
+    <a class="navbar-brand me-5 text-white" routerLink="/blank/home">
+      <img src="assets/images/logo.png" width="80" alt="">
+      Game Over
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fa-solid fa-bars text-semiWhite"></i>
+    </button>
+    <div class="collapse navbar-collapse ms-5" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2  mb-lg-0" *ngIf="isLogin">
+
+        <li class="nav-item">
+          <a class="nav-link " routerLinkActive="active" routerLink="/blank/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/blank/all">All</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            platforms
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item"  [routerLink]="['/blank/platform' ,'pc' ]">PC</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/blank/platform' ,'browser' ]">Browser</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            sort-by
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" [routerLink]="['/blank/sortBy' ,'release-date' ]">release-date</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/blank/sortBy' ,'popularity' ]">popularity</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/blank/sortBy' ,'alphabetical' ]">alphabetical</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/blank/sortBy' ,'relevance' ]">relevance</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            categories
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" [routerLink]="['/blank/category' ,'racing' ]">racing</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/blank/category' ,'sports' ]">sports</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/blank/category' ,'social' ]">social</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/blank/category' ,'shooter' ]">shooter</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/blank/category' ,'open-world' ]">open-world</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/blank/category' ,'zombie' ]">zombie</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/blank/category' ,'fantasy' ]">fantasy</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/blank/category' ,'action-rpg' ]">action-rpg</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/blank/category' ,'action' ]">action</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/blank/category' ,'flight' ]">flight</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/blank/category' ,'battle-royal' ]">battle-royal</a></li>
+          </ul>
+        </li>
+
+      </ul>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/blank/login" routerLinkActive="active" *ngIf="!isLogin">login</a>
+        </li>
+        <button class="btn btn-outline-primary mx-2" (click)="logOut()" *ngIf="isLogin">log Out</button>
+        <button class="btn btn-outline-primary mx-2" *ngIf="!isLogin" routerLink="/blank/register" routerLinkActive="active">Join Free</button>
+      </ul>
+
+    </div>
+  </div>
+</nav>
