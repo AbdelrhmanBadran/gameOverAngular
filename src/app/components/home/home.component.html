@@ -14,9 +14,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 my-4">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center"> 
         <i class="fa-solid fa-robot text-semiWhite fs-3"></i>
-        <h3 class="text-semiWhite mt-3">Personalized Recommendations</h3>
+        <h3 class="text-semiWhite mt-3">
+          <span id="element"></span>
+        </h3>
         </div>
       </div>
       <div class="col-md-4 px-3 my-2" *ngFor="let game of recommand"  [routerLink]="['/blank/gameDetails' , game.id]">
@@ -41,7 +43,6 @@
       </div>
     </div>
   </div>
-
 </div>
 
 

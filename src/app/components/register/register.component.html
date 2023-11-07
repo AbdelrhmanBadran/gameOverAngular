@@ -1,4 +1,4 @@
-<div class="container">
+ <div class="container">
   <div class="row gx-0 pt-5 mt-5">
     <div class="col-lg-6 d-none d-lg-block">
       <div class="img-game w-100 h-100">
@@ -14,44 +14,45 @@
           <div class="col-12">
             <div class="row gy-3 ">
               <div class="col-md-6">
-                <input type="text" class="form-control bg-dark text-white  py-2 px-3" placeholder="First Name" formControlName="first_name">
-                <div class="alert alert-danger mt-2" role="alert" *ngIf="registerForm.get('first_name')?.dirty && registerForm.get('first_name')?.errors !==null">
-                  <p *ngIf="registerForm.get('first_name')?.getError('required')">Name is Required</p>
-                  <p *ngIf="registerForm.get('first_name')?.getError('pattern')">Minmum Length 2 and Maxmum 20</p>
+                <input type="text" class="form-control bg-dark text-white  py-2 px-3" placeholder="Name" formControlName="name">
+                <div class="alert alert-danger mt-2" role="alert" *ngIf="registerForm.get('name')?.dirty && registerForm.get('name')?.errors !== null">
+                  <p *ngIf="registerForm.get('name')?.getError('required')">Name is Required</p>
+                  <p *ngIf="registerForm.get('name')?.getError('maxlength')">Name's letters must be lower than 9 letters</p>
+                  <p *ngIf="registerForm.get('name')?.getError('minlength')">Name's letters must be greater than 3 letters</p>
+                  <p *ngIf="registerForm.get('name')?.getError('pattern')">Name must start with UpperCase</p>
                 </div>
               </div>
               <div class="col-md-6 ">
-                <input type="text" class="form-control bg-dark text-white  py-2 px-3 " placeholder="Last Name" formControlName="last_name">
-                <div class="alert alert-danger mt-2" role="alert" *ngIf="registerForm.get('last_name')?.dirty && registerForm.get('last_name')?.errors !==null">
-                  <p *ngIf="registerForm.get('last_name')?.getError('required')">Name is Required</p>
-                  <p *ngIf="registerForm.get('last_name')?.getError('pattern')">Minmum Length 2 and Maxmum 20</p>
+                <input type="email" class="form-control bg-dark text-white  py-2 px-3 " placeholder=" Email" formControlName="email">
+                <div class="alert alert-danger mt-2" role="alert" *ngIf="registerForm.get('email')?.dirty && registerForm.get('email')?.errors !==null">
+                  <p *ngIf="registerForm.get('email')?.getError('required')">Email is Required</p>
+                  <p *ngIf="registerForm.get('email')?.getError('email')">Enter Valid Email</p>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-12">
-            <input type="eamil" class="form-control bg-dark text-white w-100 py-2 px-3 " placeholder="Email Address" formControlName="email">
-            <div class="alert alert-danger mt-2" role="alert" *ngIf="registerForm.get('email')?.dirty && registerForm.get('email')?.errors !==null">
-              <p *ngIf="registerForm.get('email')?.getError('required')">Email is Required</p>
-              <p *ngIf="registerForm.get('email')?.getError('pattern')">Enter Valid Email</p>
-            </div>
-          </div>
-          <div class="col-12">
-            <input type="number" class="form-control bg-dark text-white w-100 py-2 px-3 " placeholder="Age" formControlName="age">
-            <div class="alert alert-danger mt-2" role="alert" *ngIf="registerForm.get('age')?.dirty && registerForm.get('age')?.errors !==null">
-              <p *ngIf="registerForm.get('age')?.getError('required')">Age is Required</p>
-              <p *ngIf="registerForm.get('age')?.getError('pattern')">Minimum 10 Maxmum 80</p>
             </div>
           </div>
           <div class="col-12">
             <input type="password" class="form-control bg-dark text-white w-100 py-2 px-3 " placeholder="Password" formControlName="password">
             <div class="alert alert-danger mt-2" role="alert" *ngIf="registerForm.get('password')?.dirty && registerForm.get('password')?.errors !==null">
-              <p *ngIf="registerForm.get('password')?.getError('required')">Password is Required</p>
+              <p *ngIf="registerForm.get('password')?.getError('required')">password is Required</p>
               <p *ngIf="registerForm.get('password')?.getError('pattern')">Minimum eight characters, at least one letter and one number</p>
             </div>
           </div>
+          <div class="col-12">
+            <input type="password" class="form-control bg-dark text-white w-100 py-2 px-3 " placeholder="RePassword" formControlName="rePassword">
+            <div class="alert alert-danger mt-2" role="alert" *ngIf="registerForm.get('rePassword')?.dirty && registerForm.get('rePassword')?.errors !==null">
+              <p *ngIf="registerForm.get('rePassword')?.getError('passwordMatch')">rePassword Must Matched to Password</p>
+            </div>
+          </div>
+          <div class="col-12">
+            <input type="text" class="form-control bg-dark text-white w-100 py-2 px-3 " placeholder="phone" formControlName="phone">
+            <div class="alert alert-danger mt-2" role="alert" *ngIf="registerForm.get('phone')?.dirty && registerForm.get('phone')?.errors !==null">
+              <p *ngIf="registerForm.get('phone')?.getError('required')">phone is Required</p>
+            <p *ngIf="registerForm.get('phone')?.getError('pattern')">Enter Valid phone</p>
+            </div>
+          </div>
           <div class="col-12 my-2">
-            <h1 class="alert alert-danger h5 text-center"*ngIf="errMsg.length > 0">{{errMsg}}</h1>
+            <h1 class="alert alert-danger h5 text-center"*ngIf="err">{{errMsg}}</h1>
           </div>
           <div class="col-12">
             <button class="btn btn-outline-dark border border-1 border-dark text-white reg-btn d-block w-100" [disabled]="registerForm.invalid" (click)="register(registerForm)">

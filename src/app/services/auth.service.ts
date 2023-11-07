@@ -10,26 +10,27 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class AuthService {
 
-  userId:BehaviorSubject<any> = new BehaviorSubject(null)
+  userData:BehaviorSubject<any> = new BehaviorSubject(null)
 
   constructor(private _HttpClient:HttpClient , private _Router:Router) {
-    if (localStorage.getItem('userData') !==null) {
-      this.userId.next(JSON.parse(localStorage.getItem('userData')!))
+    if (localStorage.getItem('userData') !== null) {
+      this.userData.next(JSON.parse(localStorage.getItem('userData')!))
     }
   }
+  baseUrl:string = 'https://ecommerce.routemisr.com/api/v1/auth/'
 
   register(userData:RegisterForm):Observable<any>
   {
-    return this._HttpClient.post('https://sticky-note-fe.vercel.app/signup' , userData )
+    return this._HttpClient.post(`${this.baseUrl}signup` , userData )
   }
 
   login(userData:LoginForm):Observable<any>
   {
-    return this._HttpClient.post('https://sticky-note-fe.vercel.app/signin' , userData )
+    return this._HttpClient.post(`${this.baseUrl}signin` , userData )
   }
   logOut()
   {
-    this.userId.next(null)
+    this.userData.next(null)
     localStorage.removeItem('userData')
     this._Router.navigate(['/blank/login'])
 

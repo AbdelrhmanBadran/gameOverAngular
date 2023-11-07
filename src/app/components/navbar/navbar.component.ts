@@ -14,7 +14,7 @@ export class NavbarComponent {
   isLogin:boolean = false
 
   ngOnInit(): void {
-    this._AuthService.userId.subscribe({
+    this._AuthService.userData.subscribe({
       next: userData=>{
         if (userData !== null) {
           this.isLogin = true

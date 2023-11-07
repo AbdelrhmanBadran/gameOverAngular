@@ -11,7 +11,7 @@ import { GamesService } from 'src/app/services/games.service';
 export class PlatformComponent {
 
   constructor(private _ActivatedRoute:ActivatedRoute , private _GamesService:GamesService){ }
-
+  
   platform:string = '';
   gamesPlate:Game[] = []
   noOfShownData!:number
@@ -26,7 +26,6 @@ export class PlatformComponent {
         this.isLoading = true
         console.log(params.get('platform'));
         this.platform = params.get('platform')!;
-
         this._GamesService.getPlatGames(this.platform).subscribe({
           next:res=> {
             setTimeout(() => {
@@ -38,13 +37,10 @@ export class PlatformComponent {
           error:err=>{
             console.log(err);
             this.isLoading = false
-
           }
         })
       }
     })
-
-
   }
 
   seeMore(){

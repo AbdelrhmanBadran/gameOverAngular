@@ -11,21 +11,20 @@
             <img src="assets/images/logo.png" width="150" alt="">
         </div>
         <h1 class="text-center h3 text-semiWhite">Log in to GamOver</h1>
-
-        <input type="email" class="form-control bg-dark text-white w-100 py-2 px-3 " placeholder="Email Address" formControlName="email">
+        <input type="email" class="form-control bg-dark text-white  py-2 px-3 " placeholder=" Email" formControlName="email">
         <div class="alert alert-danger mt-2" role="alert" *ngIf="loginForm.get('email')?.dirty && loginForm.get('email')?.errors !==null">
           <p *ngIf="loginForm.get('email')?.getError('required')">Email is Required</p>
-          <p *ngIf="loginForm.get('email')?.getError('pattern')">Enter Valid Email</p>
+          <p *ngIf="loginForm.get('email')?.getError('email')">Enter Valid Email</p>
         </div>
 
         <input type="password" class="form-control bg-dark text-white w-100 py-2 px-3 " placeholder="Password" formControlName="password">
         <div class="alert alert-danger mt-2" role="alert" *ngIf="loginForm.get('password')?.dirty && loginForm.get('password')?.errors !==null">
-          <p *ngIf="loginForm.get('password')?.getError('required')">Password is Required</p>
+          <p *ngIf="loginForm.get('password')?.getError('required')">password is Required</p>
           <p *ngIf="loginForm.get('password')?.getError('pattern')">Minimum eight characters, at least one letter and one number</p>
         </div>
         <h1 class="alert alert-danger h5 text-center"*ngIf="errMsg.length > 0">{{errMsg}}</h1>
-        <button class="btn btn-outline-dark border border-1 border-dark text-white reg-btn" [disabled]="loginForm.invalid" (click)="register(loginForm)">
-          <span *ngIf="!isLoading">Create Account</span>
+        <button class="btn btn-outline-dark border border-1 border-dark text-white reg-btn" [disabled]="loginForm.invalid" (click)="login(loginForm)">
+          <span *ngIf="!isLoading">Sign in</span>
           <i class="fa-solid fa-spinner fa-spin" *ngIf="isLoading"></i>
         </button>
         </div>

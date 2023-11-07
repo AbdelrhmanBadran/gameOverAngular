@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import { GamesService } from 'src/app/services/games.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-
+ 
 @Component({
   selector: 'app-game-details',
   templateUrl: './game-details.component.html',

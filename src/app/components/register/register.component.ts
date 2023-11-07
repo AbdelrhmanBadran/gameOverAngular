@@ -14,38 +14,55 @@ export class RegisterComponent {
 
   errMsg:string = '';
   isLoading:boolean = false;
+  err:boolean = false;
 
   registerForm:FormGroup = new FormGroup({
-    first_name: new FormControl(null , [Validators.required , Validators.pattern(/^(?:[a-zA-Z0-9\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){2,20}$/)]),
-    last_name:new FormControl(null , [Validators.required , Validators.pattern(/^(?:[a-zA-Z0-9\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){2,20}$/)]),
-    email: new FormControl(null , [Validators.required , Validators.pattern(/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/)]),
-    password:new FormControl(null , [Validators.required , Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)]),
-    age:new FormControl(null , [Validators.required , Validators.pattern(/^([1-7][0-9]|80)$/)])
-  })
+    name: new FormControl(null , [Validators.required , Validators.maxLength(20) , Validators.minLength(4) , Validators.pattern(/^[A-Z][a-z]{0,}$/)]),
+    email: new FormControl(null , [Validators.required  ,Validators.email]),
+    password: new FormControl(null , [Validators.required , Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/) ]),
+    rePassword: new FormControl(null , [Validators.required  ]),
+    phone: new FormControl(null , [Validators.required  , Validators.pattern(/^01[0125][0-9]{8}$/)])
+  } , { validators: this.rePasswrdMatch } )
+
+  rePasswrdMatch(registerForm:any)
+  {
+    let rePassword = registerForm.get('rePassword')?.value
+    let Password = registerForm.get('password')?.value
+    if (rePassword === Password) {
+      return null
+    }else{
+      registerForm.get('rePassword')?.setErrors({passwordMatch :'Must match password'})
+      return {passwordMatch : 'Must match password'}
+    }
+  }
+
 
 
   register(registerForm:FormGroup){
-
-    this.isLoading = true;
+    this.isLoading = true
     if (registerForm.valid) {
+
       this._AuthService.register(registerForm.value).subscribe({
-      next:res=>{
-        if (res.message == 'success') {
-          this._Router.navigate(['/blank/login'])
-        }else{
-          this.errMsg = res.errors.email.message
-          console.log(this.errMsg);
+        next: res=>{
+          // console.log(res);
+          if(res.message == 'success'){
+            localStorage.setItem('uToken' , res.token)
+            this._Router.navigate(['blank/login'])
+            console.log('Done');
+            this.isLoading = false
+          }
+        },
+        error: err=>{
+            this.err = true
+            this.errMsg = err.error.message
+          this.isLoading = false
         }
-      },
-      error:err=>{
-        console.log(err);
-
-      },
-      complete:()=> this.isLoading = false
-    })
+      })
     }
-
-
   }
+
+
+
+
 
 }

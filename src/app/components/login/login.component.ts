@@ -13,39 +13,41 @@ export class LoginComponent {
 
   errMsg:string = '';
   isLoading:boolean = false;
+  err:boolean = false;
 
   loginForm:FormGroup = new FormGroup({
-    email: new FormControl(null , [Validators.required , Validators.pattern(/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/)]),
-    password:new FormControl(null , [Validators.required , Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)]),
+
+    email: new FormControl(null , [Validators.required  ,Validators.email]),
+    password: new FormControl(null , [Validators.required  , Validators.pattern(/^[a-z0-9]{3,}$/) ])
 
   })
 
 
-  register(loginForm:FormGroup){
-
-    this.isLoading = true;
-    if (loginForm.valid) {
+  login(loginForm:FormGroup){
+    console.log(loginForm.value);
+    this.isLoading = true
+    if (loginForm.valid)
+    {
       this._AuthService.login(loginForm.value).subscribe({
-      next:res=>{
-        console.log(res);
-        if (res.message == 'success') {
-          localStorage.setItem('userData' , JSON.stringify(res.user))
-          this._Router.navigate(['/blank/home'])
-          this._AuthService.userId.next(res.user)
-        }else{
-          this.errMsg = res.message
-          console.log(this.errMsg);
+        next: res=>{
+          console.log(res);
+          if(res.message == 'success'){
+            localStorage.setItem('uToken' , res.token)
+            this._AuthService.userData.next(res.token)
+            this._Router.navigate(['/blank/home'])
+            this.isLoading =false
+          }
+        },
+        error: err=>{
+          console.log(err);
+            this.err = true
+            this.errMsg = err.error.message
+            this.isLoading = false
+
         }
-      },
-      error:err=>{
-        console.log(err);
-
-      },
-      complete:()=> this.isLoading = false
-    })
+      })
     }
-
-
   }
+
 
 }
